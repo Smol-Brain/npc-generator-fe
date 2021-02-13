@@ -4,7 +4,7 @@ import { getScale } from './utils'
 export const MEASURE = '60ch'
 
 // Scales & Ratio
-export const RATIO = 2
+export const RATIO = 1.618
 const SCALE_0 = 1
 const SCALE_NEG_1 = getScale(SCALE_0, RATIO, true)
 const SCALE_NEG_2 = getScale(SCALE_NEG_1, RATIO, true)
@@ -39,9 +39,9 @@ export const BORDER = {
 
 // Colors
 export const COLORS = {
-    dark: '#050505',
-    darkish: '#404040',
-    light: '#fafafa',
-    lightish: '#e6e6e6',
-    mid: '#808080',
+    dark: '#2d2d2d',
+    darkish: '#674c39',
+    light: '#f7f1e3',
+    lightish: '#c7ad7a',
+    mid: '#b4703f',
 }

@@ -14,12 +14,8 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   * {
-    /* border-style: solid; */
     box-sizing: border-box;
     max-width: ${MEASURE};
-  
-    /* &::before,
-    &::after {  border-style: solid;} */
   }
 
   
@@ -36,14 +32,28 @@ export const GlobalStyles = createGlobalStyle`
     font-family: Helvetica, sans-serif;
   }
 
+  h1 {
+    font-size: 1.25em;
+  }
+
   img {
     max-width: 100%;
   }
 
-  button {
+  button,
+  input[type=submit] {
     background-color: inherit;
     border-color: inherit;
     border: ${BORDER.thick} solid;
     padding: ${SCALE['s-1']};
+  }
+
+  section {
+    outline: ${BORDER.thick} solid;
+  }
+
+  .hidden,
+  [hidden] {
+    display: none;
   }
 `
