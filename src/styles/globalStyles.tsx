@@ -42,10 +42,15 @@ export const GlobalStyles = createGlobalStyle`
 
   button,
   input[type=submit] {
+      cursor: pointer;
     background-color: inherit;
     border-color: inherit;
     border: ${BORDER.thick} solid;
     padding: ${SCALE['s-1']};
+
+    &:disabled {
+      cursor: not-allowed;
+    }
   }
 
   section {
