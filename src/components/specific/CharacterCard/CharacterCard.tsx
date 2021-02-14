@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { CSSTransition } from 'react-transition-group'
 
 import { Stack } from 'components/layouts/Stack'
+import { Grid } from 'components/layouts/Grid'
 import { ANIMATION_TIME, SCALE } from 'styles/variables'
 import { ICharacter } from 'types'
 
@@ -17,9 +18,14 @@ export const CharacterCard = ({
     gender,
     height,
     id,
+    hook,
     job,
+    languages,
     lastName,
     lifeStage,
+    negativeTraits,
+    neutralTraits,
+    positiveTraits,
     pronouns,
     race,
     wealth,
@@ -52,18 +58,53 @@ export const CharacterCard = ({
                         {firstName} {lastName}
                     </h2>
                     <p>{`${gender} - ${race} - ${pronouns}`}</p>
+                    <p>Age: {lifeStage}</p>
+                    <p>Height: {height}</p>
+                    <h3>Languages</h3>
                     <ul>
-                        <li>Age: {lifeStage}</li>
-                        <li>Height: {height}</li>
+                        {languages.map(language => {
+                            return <li>{language}</li>
+                        })}
                     </ul>
                 </Stack>
-                <Stack space={CARD_SCALE}>
-                    <h3>Life style</h3>
-                    <ul>
-                        <li>Job: {job}</li>
-                        <li>Wealth: {wealth}</li>
-                    </ul>
-                </Stack>
+                <Grid>
+                    <div>
+                        <h3>Hook</h3>
+                        <p>{hook}</p>
+                    </div>
+                    <div>
+                        <h3>Positive</h3>
+                        <ul>
+                            {positiveTraits.map(trait => {
+                                return <li>{trait}</li>
+                            })}
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Neutral</h3>
+                        <ul>
+                            {neutralTraits.map(trait => {
+                                return <li>{trait}</li>
+                            })}
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Negative</h3>
+                        <ul>
+                            {negativeTraits.map(trait => {
+                                return <li>{trait}</li>
+                            })}
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3>Life style</h3>
+                        <ul>
+                            <li>Job: {job}</li>
+                            <li>Wealth: {wealth}</li>
+                        </ul>
+                    </div>
+                </Grid>
             </CharacterContainer>
         </CSSTransition>
     )
