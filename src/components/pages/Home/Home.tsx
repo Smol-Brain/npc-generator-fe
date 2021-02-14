@@ -1,9 +1,9 @@
 import { useState } from 'react'
 
-import { CharacterCard } from 'components/specific/CharacterCard'
-import { Cover } from 'components/layouts/Cover'
+import { Grid } from 'components/layouts/Grid'
 import { Sidebar } from 'components/layouts/Sidebar'
 import { Stack } from 'components/layouts/Stack'
+import { CharacterCard } from 'components/specific/CharacterCard'
 import { COLORS, SCALE } from 'styles/variables'
 import { generateMockNpc } from 'mocks/characterMock'
 import { ICharacter } from 'types'
@@ -17,18 +17,41 @@ export const Home = () => {
 
     return (
         <Sidebar>
-            <section style={{ padding: SCALE.s2, minHeight: '100vh' }}>
-                <Stack recursive>
+            <section style={{ padding: SCALE.s2 }}>
+                <Stack>
                     <h1>Your party walks into the tavern</h1>
                     <form onSubmit={handleSubmit}>
                         <input type="submit" value="Generate NPC" />
                     </form>
+                    {npcList.length > 0 ? <h2>Current NPCs</h2> : null}
+                    <Grid minWidth="100px">
+                        {npcList.map((npc, i) => {
+                            return (
+                                <div>
+                                    <a
+                                        href={`#${npc.firstName}-${npc.lastName}-${i}`}
+                                    >{`${npc.firstName} ${npc.lastName}`}</a>
+                                </div>
+                            )
+                        })}
+                    </Grid>
                 </Stack>
             </section>
-            <main style={{ padding: SCALE.s2, background: COLORS.light }}>
+            <main
+                style={{
+                    background: COLORS.lightish,
+                    minHeight: '100vh',
+                    padding: SCALE.s2,
+                }}
+            >
                 <Stack>
-                    {npcList.map(npc => {
-                        return <CharacterCard {...npc} />
+                    {npcList.map((npc, i) => {
+                        return (
+                            <CharacterCard
+                                id={`${npc.firstName}-${npc.lastName}-${i}`}
+                                {...npc}
+                            />
+                        )
                     })}
                 </Stack>
             </main>

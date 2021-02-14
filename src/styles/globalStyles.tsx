@@ -8,9 +8,15 @@ import { COLORS, MEASURE, BORDER, SCALE } from './variables'
 export const GlobalStyles = createGlobalStyle`
 
   :root {  
-    font-size: calc(1rem + 0.4vw); 
-    font-family: sans-serif;
     background-color: ${COLORS.light};
+    font-family: sans-serif;
+    font-size: calc(1rem + 0.4vw); 
+    scroll-padding: ${SCALE.s2} 0 0 ${SCALE.s2};
+
+    @media (prefers-reduced-motion: no-preference) {
+      scroll-behavior: smooth;
+    }
+
   }
 
   * {
@@ -53,8 +59,8 @@ export const GlobalStyles = createGlobalStyle`
     }
   }
 
-  section {
-    outline: ${BORDER.thick} solid;
+  a {
+    color: ${COLORS.dark};
   }
 
   .hidden,
