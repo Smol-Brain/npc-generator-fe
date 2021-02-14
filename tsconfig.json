@@ -17,5 +17,5 @@
         "noEmit": true,
         "jsx": "react-jsx"
     },
-    "include": ["src", "fonts.d.ts"]
+    "include": ["src", "fonts.d.ts", "Transition.d.ts"]
 }

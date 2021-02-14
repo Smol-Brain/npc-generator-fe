@@ -45,3 +45,7 @@ export const COLORS = {
     lightish: '#c7ad7a',
     mid: '#b4703f',
 }
+
+// Animation
+export const ANIMATION_TIME = 300
+export const ANIMATION_TIME_MS = `${ANIMATION_TIME}ms`
