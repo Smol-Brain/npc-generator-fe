@@ -46,7 +46,7 @@ export const Home = () => {
                 </Stack>
             </section>
             <main id="main">
-                <Stack>
+                <Grid>
                     {npcList.map((npc, i) => {
                         return (
                             <CharacterCard
@@ -56,7 +56,7 @@ export const Home = () => {
                             />
                         )
                     })}
-                </Stack>
+                </Grid>
                 <ScrollToTop hasScrolledDown={isScroll} targetID="#main" />
             </main>
         </Sidebar>
