@@ -37,13 +37,7 @@ export const Home = () => {
                     </Grid>
                 </Stack>
             </section>
-            <main
-                style={{
-                    background: COLORS.lightish,
-                    minHeight: '100vh',
-                    padding: SCALE.s2,
-                }}
-            >
+            <main>
                 <Stack>
                     {npcList.map((npc, i) => {
                         return (
