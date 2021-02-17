@@ -46,7 +46,7 @@ export const Home = () => {
                 </Stack>
             </section>
             <main id="main">
-                <Grid>
+                <Grid minWidth="300px">
                     {npcList.map((npc, i) => {
                         return (
                             <CharacterCard
