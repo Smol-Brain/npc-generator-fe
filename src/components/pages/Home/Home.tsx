@@ -4,7 +4,9 @@ import { Grid } from 'components/layouts/Grid'
 import { Sidebar } from 'components/layouts/Sidebar'
 import { Stack } from 'components/layouts/Stack'
 import { CharacterCard } from 'components/specific/CharacterCard'
-import { COLORS, SCALE } from 'styles/variables'
+import { ScrollToTop } from 'components/specific/ScrollToTop'
+import { useScroll } from 'hooks/useScroll'
+import { SCALE } from 'styles/variables'
 import { generateMockNpc } from 'mocks/characterMock'
 import { ICharacter } from 'types'
 
@@ -15,6 +17,8 @@ export const Home = () => {
         setNpcList([...npcList, generateMockNpc()])
     }
 
+    const isScroll = useScroll()
+
     return (
         <Sidebar>
             <section style={{ padding: SCALE.s2 }}>
@@ -24,20 +28,22 @@ export const Home = () => {
                         <input type="submit" value="Generate NPC" />
                     </form>
                     {npcList.length > 0 ? <h2>Current NPCs</h2> : null}
-                    <Grid minWidth="100px">
-                        {npcList.map((npc, i) => {
-                            return (
-                                <div>
-                                    <a
-                                        href={`#${npc.firstName}-${npc.lastName}-${i}`}
-                                    >{`${npc.firstName} ${npc.lastName}`}</a>
-                                </div>
-                            )
-                        })}
-                    </Grid>
+                    <nav>
+                        <Stack as="ul">
+                            {npcList.map((npc, i) => {
+                                return (
+                                    <li>
+                                        <a
+                                            href={`#${npc.firstName}-${npc.lastName}-${i}`}
+                                        >{`${npc.firstName} ${npc.lastName}`}</a>
+                                    </li>
+                                )
+                            })}
+                        </Stack>
+                    </nav>
                 </Stack>
             </section>
-            <main>
+            <main id="main">
                 <Stack>
                     {npcList.map((npc, i) => {
                         return (
@@ -48,6 +54,7 @@ export const Home = () => {
                         )
                     })}
                 </Stack>
+                <ScrollToTop hasScrolledDown={isScroll} target="#main" />
             </main>
         </Sidebar>
     )

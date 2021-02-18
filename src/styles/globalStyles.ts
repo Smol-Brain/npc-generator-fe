@@ -1,8 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
 
-// import CarroisGothicSCRegularWoff from 'assets/fonts/CarroisGothicSCRegular.woff'
-// import CarroisGothicSCRegularWoff2 from 'assets/fonts/CarroisGothicSCRegular.woff2'
-
 import { COLORS, MEASURE, BORDER, SCALE } from './variables'
 
 export const GlobalStyles = createGlobalStyle`
@@ -18,13 +15,32 @@ export const GlobalStyles = createGlobalStyle`
       scroll-behavior: smooth;
     }
 
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important
+      }
+    }
   }
 
+  :-moz-focusring {
+    outline: ${COLORS.dark} medium dashed;
+    outline-offset: ${SCALE['s-3']};
+
+      &[type="button"], 
+      &[type="reset"], 
+      &[type="submit"], 
+      button {
+        outline: ${COLORS.dark} medium dashed;
+        outline-offset: ${SCALE['s-3']};
+    }
+  }
+
+  }
   * {
     box-sizing: border-box;
     max-width: ${MEASURE};
   }
-
   
   html,body,div,header,nav,main,footer {
     max-width: none;
@@ -49,10 +65,10 @@ export const GlobalStyles = createGlobalStyle`
 
   button,
   input[type=submit] {
-      cursor: pointer;
     background-color: inherit;
     border-color: inherit;
     border: ${BORDER.thick} solid;
+    cursor: pointer;
     padding: ${SCALE['s-1']};
 
     &:disabled {
@@ -74,5 +90,14 @@ export const GlobalStyles = createGlobalStyle`
   .hidden,
   [hidden] {
     display: none;
+  }
+
+  #scroll-pixel {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    top: 50px;
+    left: 0;
+    pointer-events: none;
   }
 `
