@@ -1,5 +1,8 @@
 import { createGlobalStyle } from 'styled-components'
 
+import gritTexture from 'assets/textures/grit.png'
+import woodTexture from 'assets/textures/wood.png'
+
 import { COLORS, MEASURE, BORDER, SCALE } from './variables'
 
 export const GlobalStyles = createGlobalStyle`
@@ -9,7 +12,7 @@ export const GlobalStyles = createGlobalStyle`
     font-family: sans-serif;
     font-size: calc(1rem + 0.4vw); 
     scroll-padding: ${SCALE.s2} 0 0 ${SCALE.s2};
-    background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/49914/grit-fs8.png);
+    background-image: url(${gritTexture});
 
     @media (prefers-reduced-motion: no-preference) {
       scroll-behavior: smooth;
@@ -82,7 +85,7 @@ export const GlobalStyles = createGlobalStyle`
 
   main {
     background-color: ${COLORS.lightish};
-    background-image:  url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/49914/veneer-birch-texture-fs8.png');
+    background-image:  url(${woodTexture});
     min-height: 100vh;
     padding: ${SCALE.s2};
   }
