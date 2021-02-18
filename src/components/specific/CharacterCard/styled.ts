@@ -39,7 +39,7 @@ export const CharacterContainer = styled(Card)`
         position: absolute;
         left: 0;
         right: 0;
-        -webkit-clip-path: polygon(
+        clip-path: polygon(
             0% 0%,
             5% 100%,
             10% 0%,
