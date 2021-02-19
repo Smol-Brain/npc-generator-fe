@@ -32,7 +32,9 @@ export const Home = () => {
                         <Stack as="ul">
                             {npcList.map((npc, i) => {
                                 return (
-                                    <li>
+                                    <li
+                                        key={`link-${npc.firstName}-${npc.lastName}-${i}`}
+                                    >
                                         <a
                                             href={`#${npc.firstName}-${npc.lastName}-${i}`}
                                         >{`${npc.firstName} ${npc.lastName}`}</a>
@@ -49,12 +51,13 @@ export const Home = () => {
                         return (
                             <CharacterCard
                                 id={`${npc.firstName}-${npc.lastName}-${i}`}
+                                key={`card-${npc.firstName}-${npc.lastName}-${i}`}
                                 {...npc}
                             />
                         )
                     })}
                 </Stack>
-                <ScrollToTop hasScrolledDown={isScroll} target="#main" />
+                <ScrollToTop hasScrolledDown={isScroll} targetID="#main" />
             </main>
         </Sidebar>
     )

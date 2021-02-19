@@ -4,15 +4,15 @@ import { ScrollLink } from './styled'
 
 export interface IScrollToTop {
     hasScrolledDown: boolean
-    target: string
+    targetID: string
 }
 
-export const ScrollToTop = ({ hasScrolledDown, target }: IScrollToTop) => {
+export const ScrollToTop = ({ hasScrolledDown, targetID }: IScrollToTop) => {
     return (
         <ScrollLink
             hasScrolledDown={hasScrolledDown}
-            href={target}
-            target={target}
+            href={targetID}
+            targetID={targetID}
         >
             <Icon iconId="arrow" space="0" aria-label="Scroll to top" />
         </ScrollLink>
