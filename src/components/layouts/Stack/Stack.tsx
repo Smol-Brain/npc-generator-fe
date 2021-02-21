@@ -3,7 +3,6 @@ import { SCALE } from 'styles/variables'
 
 import { StackContainer } from './styled'
 
-const Thing = styled.a``
 export interface IStackProps extends React.HTMLAttributes<HTMLDivElement> {
     as?: string | React.ComponentType<any>
     recursive?: boolean
