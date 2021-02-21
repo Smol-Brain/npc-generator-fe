@@ -55,7 +55,7 @@ const getFirst = () => getRandomItem(firstNames)
 const getIdentity = () => identites[random(identites.length)]
 const getLast = () => getRandomItem(lastNames)
 const getHeight = () => getRandomItem(heights)
-const getHook = () => getRandomItem(hooks)
+const getQuirk = () => getRandomItem(hooks)
 const getJob = () => getRandomItem(jobs)
 const getLanguages = () => getRandomList(languages)
 const getLifeState = () => getRandomItem(lifeStage)
@@ -69,7 +69,7 @@ export const characterMock: ICharacter = {
     firstName: getFirst(),
     gender: getIdentity().gender,
     height: getHeight(),
-    hook: getHook(),
+    quirk: getQuirk(),
     job: getJob(),
     languages: getLanguages(),
     lastName: getLast(),
@@ -89,7 +89,7 @@ export const generateMockNpc = (): ICharacter => {
         firstName: getFirst(),
         gender: identity.gender,
         height: getHeight(),
-        hook: getHook(),
+        quirk: getQuirk(),
         job: getJob(),
         languages: getLanguages(),
         lastName: getLast(),

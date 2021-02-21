@@ -18,7 +18,7 @@ export const CharacterCard = ({
     gender,
     height,
     id,
-    hook,
+    quirk,
     job,
     languages,
     lastName,
@@ -70,7 +70,7 @@ export const CharacterCard = ({
                 <Grid>
                     <div>
                         <h3>Hook</h3>
-                        <p>{hook}</p>
+                        <p>{quirk}</p>
                     </div>
                     <div>
                         <h3>Positive</h3>

@@ -2,7 +2,7 @@ export interface ICharacter {
     firstName: string
     gender: string
     height: string
-    hook: string
+    quirk: string
     job: string
     languages: string[]
     lastName: string
