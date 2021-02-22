@@ -1,20 +1,22 @@
 import { useState } from 'react'
 
-import { Grid } from 'components/layouts/Grid'
+import { generateNpc } from 'api/generateNPC'
 import { Sidebar } from 'components/layouts/Sidebar'
 import { Stack } from 'components/layouts/Stack'
 import { CharacterCard } from 'components/specific/CharacterCard'
 import { ScrollToTop } from 'components/specific/ScrollToTop'
 import { useScroll } from 'hooks/useScroll'
 import { SCALE } from 'styles/variables'
-import { generateMockNpc } from 'mocks/characterMock'
 import { ICharacter } from 'types'
 
 export const Home = () => {
     const [npcList, setNpcList] = useState<ICharacter[]>([])
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        setNpcList([...npcList, generateMockNpc()])
+        const newNPC = await generateNpc()
+
+        setNpcList([...npcList, newNPC.data])
     }
 
     const isScroll = useScroll()
@@ -30,14 +32,14 @@ export const Home = () => {
                     {npcList.length > 0 ? <h2>Current NPCs</h2> : null}
                     <nav>
                         <Stack as="ul">
-                            {npcList.map((npc, i) => {
+                            {npcList.map(({ firstName, id, lastName }, i) => {
                                 return (
-                                    <li
-                                        key={`link-${npc.firstName}-${npc.lastName}-${i}`}
-                                    >
+                                    <li key={`link-${firstName}-${i}`}>
                                         <a
-                                            href={`#${npc.firstName}-${npc.lastName}-${i}`}
-                                        >{`${npc.firstName} ${npc.lastName}`}</a>
+                                            href={`#${
+                                                id ? id : firstName
+                                            }-${i}`}
+                                        >{`${firstName} ${lastName}`}</a>
                                     </li>
                                 )
                             })}
@@ -47,12 +49,13 @@ export const Home = () => {
             </section>
             <main id="main">
                 <Stack>
-                    {npcList.map((npc, i) => {
+                    {npcList.map(({ firstName, id, ...rest }, i) => {
                         return (
                             <CharacterCard
-                                id={`${npc.firstName}-${npc.lastName}-${i}`}
-                                key={`card-${npc.firstName}-${npc.lastName}-${i}`}
-                                {...npc}
+                                firstName={firstName}
+                                id={`${id ? id : firstName}-${i}`}
+                                key={`card-${firstName}-${i}`}
+                                {...rest}
                             />
                         )
                     })}

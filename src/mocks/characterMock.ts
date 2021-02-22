@@ -69,7 +69,7 @@ export const characterMock: ICharacter = {
     firstName: getFirst(),
     gender: getIdentity().gender,
     height: getHeight(),
-    quirk: getQuirk(),
+    id: '',
     job: getJob(),
     languages: getLanguages(),
     lastName: getLast(),
@@ -78,6 +78,7 @@ export const characterMock: ICharacter = {
     neutralTraits: getNeutralTraits(),
     positiveTraits: getPositiveTraits(),
     pronouns: getIdentity().pronouns,
+    quirk: getQuirk(),
     race: getRace(),
     wealth: getWealth(),
 }
@@ -89,7 +90,7 @@ export const generateMockNpc = (): ICharacter => {
         firstName: getFirst(),
         gender: identity.gender,
         height: getHeight(),
-        quirk: getQuirk(),
+        id: '',
         job: getJob(),
         languages: getLanguages(),
         lastName: getLast(),
@@ -98,6 +99,7 @@ export const generateMockNpc = (): ICharacter => {
         neutralTraits: getNeutralTraits(),
         positiveTraits: getPositiveTraits(),
         pronouns: identity.pronouns,
+        quirk: getQuirk(),
         race: getRace(),
         wealth: getWealth(),
     }

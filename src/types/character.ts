@@ -2,7 +2,7 @@ export interface ICharacter {
     firstName: string
     gender: string
     height: string
-    quirk: string
+    id: string
     job: string
     languages: string[]
     lastName: string
@@ -11,6 +11,7 @@ export interface ICharacter {
     neutralTraits: string[]
     positiveTraits: string[]
     pronouns: string
+    quirk: string
     race: string
     wealth: string
 }

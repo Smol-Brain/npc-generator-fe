@@ -8,8 +8,8 @@ import { ICharacter } from 'types'
 
 import { CharacterContainer } from './styled'
 interface ICharacterCardProps
-    extends ICharacter,
-        React.HTMLAttributes<HTMLDivElement> {}
+    extends Omit<React.HTMLAttributes<HTMLDivElement>, 'id'>,
+        ICharacter {}
 
 const CARD_SCALE = SCALE['s0']
 
