@@ -58,53 +58,52 @@ export const CharacterCard = ({
                         {firstName} {lastName}
                     </h2>
                     <p>{`${gender} - ${race} - ${pronouns}`}</p>
-                    <p>Age: {lifeStage}</p>
-                    <p>Height: {height}</p>
-                    <h3>Languages</h3>
-                    <ul>
-                        {languages.map(language => {
-                            return <li>{language}</li>
-                        })}
-                    </ul>
-                </Stack>
-                <Grid>
-                    <div>
-                        <h3>Hook</h3>
-                        <p>{quirk}</p>
-                    </div>
-                    <div>
-                        <h3>Positive</h3>
-                        <ul>
-                            {positiveTraits.map(trait => {
-                                return <li>{trait}</li>
-                            })}
-                        </ul>
-                    </div>
-                    <div>
-                        <h3>Neutral</h3>
-                        <ul>
-                            {neutralTraits.map(trait => {
-                                return <li>{trait}</li>
-                            })}
-                        </ul>
-                    </div>
-                    <div>
-                        <h3>Negative</h3>
-                        <ul>
-                            {negativeTraits.map(trait => {
-                                return <li>{trait}</li>
-                            })}
-                        </ul>
-                    </div>
 
-                    <div>
-                        <h3>Life style</h3>
-                        <ul>
-                            <li>Job: {job}</li>
-                            <li>Wealth: {wealth}</li>
-                        </ul>
-                    </div>
-                </Grid>
+                    <Grid>
+                        <div>
+                            <h3>Mental</h3>
+                            <p>
+                                <strong>Speaks:</strong>{' '}
+                                {languages.join(', /n')}
+                            </p>
+                            <p>
+                                <strong>Quirk: </strong>
+                                {quirk}
+                            </p>
+                        </div>
+                        <div>
+                            <h3>Physical</h3>
+                            <p>
+                                <strong>Life Stage:</strong> {lifeStage}
+                            </p>
+                            <p>
+                                <strong>Height:</strong> {height}
+                            </p>
+                        </div>
+                        <div>
+                            <h3>Lifestyle</h3>
+                            <p>
+                                <strong>Wealth: </strong>
+                                {wealth}
+                            </p>
+                        </div>
+                        <div>
+                            <h3>Traits</h3>
+                            <p>
+                                <strong>Positive: </strong>
+                                {positiveTraits.join(', \n')}
+                            </p>
+                            <p>
+                                <strong>Neutral: </strong>
+                                {neutralTraits.join(', \n')}
+                            </p>
+                            <p>
+                                <strong>Negative: </strong>
+                                {negativeTraits.join(', \n')}
+                            </p>
+                        </div>
+                    </Grid>
+                </Stack>
             </CharacterContainer>
         </CSSTransition>
     )
