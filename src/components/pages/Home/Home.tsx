@@ -11,11 +11,14 @@ import { ICharacter } from 'types'
 
 export const Home = () => {
     const [npcList, setNpcList] = useState<ICharacter[]>([])
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
+        setIsLoading(true)
         const newNPC = await generateNpc()
 
+        setIsLoading(false)
         setNpcList([...npcList, newNPC.data])
     }
 
@@ -27,7 +30,11 @@ export const Home = () => {
                 <Stack>
                     <h1>Your party walks into the tavern</h1>
                     <form onSubmit={handleSubmit}>
-                        <input type="submit" value="Generate NPC" />
+                        <input
+                            disabled={isLoading}
+                            type="submit"
+                            value="Generate NPC"
+                        />
                     </form>
                     {npcList.length > 0 ? <h2>Current NPCs</h2> : null}
                     <nav>
