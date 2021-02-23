@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components'
 
 import gritTexture from 'assets/textures/grit.png'
-import woodTexture from 'assets/textures/wood.png'
+import patternTexture from 'assets/textures/pattern.svg'
 
 import { COLORS, MEASURE, BORDER, SCALE } from './variables'
 
@@ -83,9 +83,13 @@ export const GlobalStyles = createGlobalStyle`
     color: ${COLORS.dark};
   }
 
+  /* cardboardTexture
+cartTexture
+paperTexture */
+
   main {
+    background-image: url(${patternTexture});
     background-color: ${COLORS.lightish};
-    background-image:  url(${woodTexture});
     min-height: 100vh;
     padding: ${SCALE.s2};
   }

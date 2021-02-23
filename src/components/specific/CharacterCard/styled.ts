@@ -1,9 +1,11 @@
 import styled from 'styled-components'
 
+import gritTexture from 'assets/textures/grit.png'
 import { Card } from 'components/common/Card'
 import { ANIMATION_TIME_MS, COLORS, SCALE } from 'styles/variables'
 
 export const CharacterContainer = styled(Card)`
+    background-image: url(${gritTexture});
     position: relative;
     box-shadow: 0 3px 1px rgba(0, 0, 0, 0.05);
     opacity: 0;
@@ -65,7 +67,7 @@ export const CharacterContainer = styled(Card)`
     }
 
     &:before {
-        background-color: ${COLORS.lightish};
+        background-color: ${COLORS.darkish};
         top: -0.07em;
     }
     &:after {
