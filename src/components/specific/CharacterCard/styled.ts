@@ -74,4 +74,8 @@ export const CharacterContainer = styled(Card)`
         background-color: ${COLORS.light};
         bottom: -0.14em;
     }
+
+    strong {
+        display: block;
+    }
 `
