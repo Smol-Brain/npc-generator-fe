@@ -64,7 +64,7 @@ export const CharacterCard = ({
                             <h3>Mental</h3>
                             <p>
                                 <strong>Speaks:</strong>{' '}
-                                {languages.join(', /n')}
+                                {languages.join(', \n')}
                             </p>
                             <p>
                                 <strong>Quirk: </strong>
