@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { CSSTransition } from 'react-transition-group'
 
+import { saveNpc } from 'api/saveNPC'
 import { Stack } from 'components/layouts/Stack'
 import { Grid } from 'components/layouts/Grid'
 import { ANIMATION_TIME, SCALE } from 'styles/variables'
@@ -18,7 +19,6 @@ export const CharacterCard = ({
     gender,
     height,
     id,
-    quirk,
     job,
     languages,
     lastName,
@@ -27,17 +27,51 @@ export const CharacterCard = ({
     neutralTraits,
     positiveTraits,
     pronouns,
+    quirk,
     race,
+    userId,
     wealth,
     ...rest
 }: ICharacterCardProps) => {
     const [isMounted, setIsMounted] = useState(false)
     // Ignore flicker on transition
     const [isShown, setIsShown] = useState(false)
+    const [isSaved, setIsSaved] = useState(false)
 
     useEffect(() => {
         setIsMounted(true)
     }, [])
+
+    const hancleCharacterSave = async () => {
+        if (!userId) return
+
+        const savedNPC = await saveNpc({
+            character: {
+                firstName,
+                gender,
+                height,
+                id,
+                job,
+                languages,
+                lastName,
+                lifeStage,
+                negativeTraits,
+                neutralTraits,
+                positiveTraits,
+                pronouns,
+                quirk,
+                race,
+                wealth,
+                userId,
+            },
+        })
+
+        if (savedNPC) {
+            setIsSaved(true)
+        }
+
+        console.log(savedNPC)
+    }
 
     return (
         <CSSTransition
@@ -58,6 +92,16 @@ export const CharacterCard = ({
                         {firstName} {lastName}
                     </h2>
                     <p>{`${gender} - ${race} - ${pronouns}`}</p>
+                    {userId ? (
+                        <button
+                            disabled={isSaved}
+                            onClick={hancleCharacterSave}
+                        >
+                            {isSaved ? 'Saved' : 'Save Character'}
+                        </button>
+                    ) : (
+                        'no user'
+                    )}
 
                     <Grid>
                         <div>

@@ -13,5 +13,6 @@ export interface ICharacter {
     pronouns: string
     quirk: string
     race: string
+    userId?: string
     wealth: string
 }
