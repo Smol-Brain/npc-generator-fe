@@ -9,12 +9,13 @@ import { Stack } from 'components/layouts/Stack'
 import { UserContext } from 'components/contexts/UserProvider'
 import { SCALE } from 'styles/variables'
 import { useScroll } from 'hooks/useScroll'
-import { ICharacter } from 'types'
-import { auth, generateUserDocument, signInWithGoogle } from 'utils/firebase'
+import { ICharacter, IFirebaseUser } from 'types'
+import { auth, getUser, signInWithGoogle } from 'utils/firebase'
 
 export const Home = () => {
     const [npcList, setNpcList] = useState<ICharacter[]>([])
     const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [currentUserId, setCurrentUserId] = useState<string>('')
     const { user } = useContext(UserContext)
     const isScroll = useScroll()
 
@@ -24,19 +25,32 @@ export const Home = () => {
         const newNPC = await generateNpc()
 
         setIsLoading(false)
-        setNpcList([...npcList, newNPC.data])
+        setNpcList([...npcList, { ...newNPC.data, userId: currentUserId }])
     }
 
-    const handleSignout = () => auth.signOut()
+    const handleSignout = () => {
+        auth.signOut()
+    }
+
+    const handleNewUser = async (user: IFirebaseUser) => {
+        const appUser = await getUser(user)
+
+        if (appUser) {
+            const newNPCList = npcList.map(npc => {
+                return { ...npc, userId: appUser.id }
+            })
+
+            setCurrentUserId(appUser.id)
+            setNpcList(newNPCList)
+        }
+    }
 
     useEffect(() => {
         if (!user) {
             return
         }
 
-        const newUser = generateUserDocument(user)
-
-        console.log(newUser)
+        handleNewUser(user)
     }, [user])
 
     return (
