@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from 'uuid'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
+import { IAppUser } from 'types'
 
 const config = {
     apiKey: process.env.REACT_APP_GOOGLE_API_KEY,
@@ -22,20 +23,32 @@ export const signInWithGoogle = () => {
     auth.signInWithPopup(provider)
 }
 
-export const generateUserDocument = async (user: firebase.User | null) => {
+const getUserDocument = async (uid: string) => {
+    if (!uid) return null
+    try {
+        const userDocument = await firestore.doc(`users/${uid}`).get()
+        return {
+            ...userDocument.data(),
+        } as IAppUser
+    } catch (error) {
+        console.error('Error fetching user', error)
+    }
+}
+
+// Get user document, if a user does not exist create a user record
+export const getUser = async (user: firebase.User | null) => {
     if (!user) return
 
     const userRef = firestore.doc(`users/${user.uid}`)
     const snapshot = await userRef.get()
 
     if (!snapshot.exists) {
-        const { email, displayName, photoURL } = user
+        const { displayName, photoURL } = user
         const id = uuidv4()
 
         try {
             await userRef.set({
                 displayName,
-                email,
                 id,
                 photoURL,
             })
@@ -44,17 +57,4 @@ export const generateUserDocument = async (user: firebase.User | null) => {
         }
     }
     return getUserDocument(user.uid)
-}
-
-const getUserDocument = async (uid: string) => {
-    if (!uid) return null
-    try {
-        const userDocument = await firestore.doc(`users/${uid}`).get()
-        return {
-            uid,
-            ...userDocument.data(),
-        }
-    } catch (error) {
-        console.error('Error fetching user', error)
-    }
 }
