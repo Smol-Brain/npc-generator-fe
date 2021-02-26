@@ -10,11 +10,14 @@ import { ICharacter } from 'types'
 import { CharacterContainer } from './styled'
 interface ICharacterCardProps
     extends Omit<React.HTMLAttributes<HTMLDivElement>, 'id'>,
-        ICharacter {}
+        ICharacter {
+    anchorId: string
+}
 
 const CARD_SCALE = SCALE['s0']
 
 export const CharacterCard = ({
+    anchorId,
     firstName,
     gender,
     height,
@@ -44,33 +47,32 @@ export const CharacterCard = ({
 
     const hancleCharacterSave = async () => {
         if (!userId) return
+        const character = {
+            firstName,
+            gender,
+            height,
+            job,
+            languages,
+            lastName,
+            lifeStage,
+            negativeTraits,
+            neutralTraits,
+            positiveTraits,
+            pronouns,
+            quirk,
+            race,
+            id,
+            userId,
+            wealth,
+        }
 
         const savedNPC = await saveNpc({
-            character: {
-                firstName,
-                gender,
-                height,
-                id,
-                job,
-                languages,
-                lastName,
-                lifeStage,
-                negativeTraits,
-                neutralTraits,
-                positiveTraits,
-                pronouns,
-                quirk,
-                race,
-                wealth,
-                userId,
-            },
+            character,
         })
 
         if (savedNPC) {
             setIsSaved(true)
         }
-
-        console.log(savedNPC)
     }
 
     return (
@@ -88,20 +90,10 @@ export const CharacterCard = ({
                 {...rest}
             >
                 <Stack space={CARD_SCALE}>
-                    <h2 id={id}>
+                    <h2 id={anchorId}>
                         {firstName} {lastName}
                     </h2>
                     <p>{`${gender} - ${race} - ${pronouns}`}</p>
-                    {userId ? (
-                        <button
-                            disabled={isSaved}
-                            onClick={hancleCharacterSave}
-                        >
-                            {isSaved ? 'Saved' : 'Save Character'}
-                        </button>
-                    ) : (
-                        'no user'
-                    )}
 
                     <Grid>
                         <div>
@@ -147,6 +139,14 @@ export const CharacterCard = ({
                             </p>
                         </div>
                     </Grid>
+                    {userId && (
+                        <button
+                            disabled={isSaved}
+                            onClick={hancleCharacterSave}
+                        >
+                            {isSaved ? 'Saved' : 'Save Character'}
+                        </button>
+                    )}
                 </Stack>
             </CharacterContainer>
         </CSSTransition>

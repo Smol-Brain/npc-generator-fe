@@ -71,36 +71,43 @@ export const Home = () => {
                             value="Generate NPC"
                         />
                     </form>
-                    {npcList.length > 0 ? <h2>Current NPCs</h2> : null}
-                    <nav>
-                        <Stack as="ul">
-                            {npcList.map(({ firstName, id, lastName }, i) => {
-                                return (
-                                    <li key={`link-${firstName}-${i}`}>
-                                        <a
-                                            href={`#${
-                                                id ? id : firstName
-                                            }-${i}`}
-                                        >{`${firstName} ${lastName}`}</a>
-                                    </li>
-                                )
-                            })}
-                        </Stack>
-                    </nav>
+                    {npcList.length > 0 ? (
+                        <nav>
+                            <h2>New Characters</h2>
+                            <Stack as="ul">
+                                {npcList.map(
+                                    ({ firstName, id, lastName }, i) => {
+                                        return (
+                                            <li key={`link-${firstName}-${i}`}>
+                                                <a
+                                                    href={`#${
+                                                        id ? id : firstName
+                                                    }-${i}`}
+                                                >{`${firstName} ${lastName}`}</a>
+                                            </li>
+                                        )
+                                    }
+                                )}
+                            </Stack>
+                        </nav>
+                    ) : null}
                 </Stack>
             </section>
             <main id="main">
                 <Stack>
+                    <h2>New Characters</h2>
                     {npcList.map(({ firstName, id, ...rest }, i) => {
                         return (
                             <CharacterCard
+                                anchorId={`${id ? id : firstName}-${i}`}
                                 firstName={firstName}
-                                id={`${id ? id : firstName}-${i}`}
+                                id={id}
                                 key={`card-${firstName}-${i}`}
                                 {...rest}
                             />
                         )
                     })}
+                    <h2>Saved Characters</h2>
                 </Stack>
                 <ScrollToTop hasScrolledDown={isScroll} targetID="#main" />
             </main>
