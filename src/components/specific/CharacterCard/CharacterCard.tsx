@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { CSSTransition } from 'react-transition-group'
 
+import { saveNpc } from 'api/saveNPC'
 import { Stack } from 'components/layouts/Stack'
 import { Grid } from 'components/layouts/Grid'
 import { ANIMATION_TIME, SCALE } from 'styles/variables'
@@ -9,16 +10,18 @@ import { ICharacter } from 'types'
 import { CharacterContainer } from './styled'
 interface ICharacterCardProps
     extends Omit<React.HTMLAttributes<HTMLDivElement>, 'id'>,
-        ICharacter {}
+        ICharacter {
+    anchorId: string
+}
 
 const CARD_SCALE = SCALE['s0']
 
 export const CharacterCard = ({
+    anchorId,
     firstName,
     gender,
     height,
     id,
-    quirk,
     job,
     languages,
     lastName,
@@ -27,17 +30,50 @@ export const CharacterCard = ({
     neutralTraits,
     positiveTraits,
     pronouns,
+    quirk,
     race,
+    userId,
     wealth,
     ...rest
 }: ICharacterCardProps) => {
     const [isMounted, setIsMounted] = useState(false)
     // Ignore flicker on transition
     const [isShown, setIsShown] = useState(false)
+    const [isSaved, setIsSaved] = useState(false)
 
     useEffect(() => {
         setIsMounted(true)
     }, [])
+
+    const hancleCharacterSave = async () => {
+        if (!userId) return
+        const character = {
+            firstName,
+            gender,
+            height,
+            job,
+            languages,
+            lastName,
+            lifeStage,
+            negativeTraits,
+            neutralTraits,
+            positiveTraits,
+            pronouns,
+            quirk,
+            race,
+            id,
+            userId,
+            wealth,
+        }
+
+        const savedNPC = await saveNpc({
+            character,
+        })
+
+        if (savedNPC) {
+            setIsSaved(true)
+        }
+    }
 
     return (
         <CSSTransition
@@ -54,7 +90,7 @@ export const CharacterCard = ({
                 {...rest}
             >
                 <Stack space={CARD_SCALE}>
-                    <h2 id={id}>
+                    <h2 id={anchorId}>
                         {firstName} {lastName}
                     </h2>
                     <p>{`${gender} - ${race} - ${pronouns}`}</p>
@@ -103,6 +139,14 @@ export const CharacterCard = ({
                             </p>
                         </div>
                     </Grid>
+                    {userId && (
+                        <button
+                            disabled={isSaved}
+                            onClick={hancleCharacterSave}
+                        >
+                            {isSaved ? 'Saved' : 'Save Character'}
+                        </button>
+                    )}
                 </Stack>
             </CharacterContainer>
         </CSSTransition>

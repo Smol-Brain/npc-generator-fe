@@ -11,5 +11,6 @@ declare namespace NodeJS {
 
         REACT_APP_NPC_API: string
         REACT_APP_NPC_API_GENERATE: string
+        REACT_APP_NPC_API_SAVE: string
     }
 }
