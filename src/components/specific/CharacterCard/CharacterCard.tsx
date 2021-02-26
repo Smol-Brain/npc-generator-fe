@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { CSSTransition } from 'react-transition-group'
 
+import { deleteNpc } from 'api/deleteNPC'
 import { saveNpc } from 'api/saveNPC'
 import { Stack } from 'components/layouts/Stack'
 import { Grid } from 'components/layouts/Grid'
@@ -40,12 +41,13 @@ export const CharacterCard = ({
     // Ignore flicker on transition
     const [isShown, setIsShown] = useState(false)
     const [isSaved, setIsSaved] = useState(false)
+    const [currentCharacterId, setCurrentCharacterId] = useState(id)
 
     useEffect(() => {
         setIsMounted(true)
     }, [])
 
-    const hancleCharacterSave = async () => {
+    const handleCharacterSave = async () => {
         if (!userId) return
         const character = {
             firstName,
@@ -61,7 +63,7 @@ export const CharacterCard = ({
             pronouns,
             quirk,
             race,
-            id,
+            id: currentCharacterId,
             userId,
             wealth,
         }
@@ -71,8 +73,17 @@ export const CharacterCard = ({
         })
 
         if (savedNPC) {
+            setCurrentCharacterId(savedNPC.data.id)
             setIsSaved(true)
         }
+    }
+
+    const handleCharacterDelete = async () => {
+        if (!currentCharacterId) {
+            return
+        }
+
+        deleteNpc({ id: currentCharacterId })
     }
 
     return (
@@ -141,10 +152,13 @@ export const CharacterCard = ({
                     </Grid>
                     {userId && (
                         <button
-                            disabled={isSaved}
-                            onClick={hancleCharacterSave}
+                            onClick={
+                                isSaved
+                                    ? handleCharacterDelete
+                                    : handleCharacterSave
+                            }
                         >
-                            {isSaved ? 'Saved' : 'Save Character'}
+                            {isSaved ? 'Remove' : 'Save'}
                         </button>
                     )}
                 </Stack>
